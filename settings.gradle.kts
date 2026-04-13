@@ -1,1 +1,1 @@
-rootProject.name = "archievment"
+rootProject.name = "archievment-backend"
