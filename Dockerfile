@@ -6,16 +6,16 @@ WORKDIR /app
 # Copy gradle wrapper and build configuration
 COPY gradlew* ./
 COPY gradle ./gradle
-COPY build.gradle.kts ./backend/
+COPY build.gradle.kts ./
 COPY settings.gradle.kts .
 
 # Copy source code
-COPY src ./backend/src
+COPY src ./src
 
 # Build the application
 # Fix CRLF line endings from Windows and make gradlew executable
 RUN sed -i 's/\r$//' ./gradlew && chmod +x ./gradlew && \
-    ./gradlew :backend:build -x test --no-daemon
+    ./gradlew build -x test --no-daemon
 
 # Stage 2: Runtime image
 FROM eclipse-temurin:25-jre
@@ -26,7 +26,7 @@ WORKDIR /app
 RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
 
 # Copy the built JAR from the builder stage
-COPY --from=builder /app/backend/build/libs/*.jar app.jar
+COPY --from=builder /app/build/libs/*.jar app.jar
 
 # Expose the port (default Spring Boot port)
 EXPOSE 8080
