@@ -6,16 +6,23 @@ WORKDIR /app
 # Copy gradle wrapper and build configuration
 COPY gradlew* ./
 COPY gradle ./gradle
-COPY build.gradle.kts ./
+
+COPY gradle.properties ./
 COPY settings.gradle.kts .
+
+COPY build.gradle.kts ./
+COPY modules/core/build.gradle.kts ./modules/core/
+
+RUN sed -i 's/\r$//' ./gradlew && chmod +x ./gradlew && \
+    ./gradlew dependencies --no-daemon
 
 # Copy source code
 COPY src ./src
+COPY modules ./modules
 
 # Build the application
 # Fix CRLF line endings from Windows and make gradlew executable
-RUN sed -i 's/\r$//' ./gradlew && chmod +x ./gradlew && \
-    ./gradlew build -x test --no-daemon
+RUN ./gradlew build -x test --no-daemon
 
 # Stage 2: Runtime image
 FROM eclipse-temurin:25-jre
