@@ -13,9 +13,9 @@ on:
 
 jobs:
   verify_build:
-    uses: ./.github/workflows/ci.yml
+    uses: ./.github/workflows/gradle_build_and_test.yml
 
-  build:
+  docker_build_and_publish:
     needs: verify_build
     runs-on: ubuntu-latest
 
