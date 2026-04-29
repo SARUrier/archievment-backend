@@ -11,7 +11,6 @@ class UserService(
     private val passwordEncoder: PasswordEncoder,
 ) : AbstractEntityService<User, UserRepository>(repository) {
 
-    @SuppressWarnings("unused")
     final fun save() {
         throw UnsupportedOperationException("Use createUser or updatePassword instead of save directly to ensure password is encoded")
     }
