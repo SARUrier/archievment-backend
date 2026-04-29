@@ -12,7 +12,7 @@ class UserController(
     private val userService: UserService,
 ) {
 
-    @GetMapping("/")
+    @GetMapping
     fun getUsers(): List<User> {
         return userService.findAll()
     }
