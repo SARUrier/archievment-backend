@@ -1,6 +1,6 @@
 spring:
   application:
-    name: backend
+    name: "backend"
   datasource:
     url: jdbc:postgresql://localhost:5432/saru
     username: postgres
