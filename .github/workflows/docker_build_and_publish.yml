@@ -23,15 +23,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
 
+      - name: Build Docker image
+        run: docker build . --tag ghcr.io/sarurier/archievment-backend:latest
+
       - name: Log in to Github Container Registry
         uses: docker/login-action@v4
         with:
           registry: ghcr.io
           username: SARUrier
           password: ${{ secrets.GH_GHCR_PAT }}
-
-      - name: Build Docker image
-        run: docker build . --tag ghcr.io/sarurier/archievment-backend:latest
         
       - name: Publish Docker image
         if: ${{ github.event_name == 'push' || github.event.inputs.push_image == 'true' }}
