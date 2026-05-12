@@ -40,3 +40,4 @@ bin/
 
 ### Kotlin ###
 .kotlin
+application-local.yaml

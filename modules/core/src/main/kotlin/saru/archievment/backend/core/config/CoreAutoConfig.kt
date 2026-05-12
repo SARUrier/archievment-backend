@@ -1,0 +1,10 @@
+package saru.archievment.backend.core.config
+
+import org.springframework.boot.autoconfigure.AutoConfiguration
+import org.springframework.boot.autoconfigure.AutoConfigurationPackage
+import org.springframework.boot.context.properties.EnableConfigurationProperties
+
+@AutoConfiguration
+@AutoConfigurationPackage
+@EnableConfigurationProperties(FileStorageProperties::class)
+class CoreAutoConfig

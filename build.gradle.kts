@@ -1,4 +1,5 @@
 import org.springframework.boot.gradle.tasks.bundling.BootJar
+import org.springframework.boot.gradle.tasks.run.BootRun
 
 val springBootVersion: String by project
 
@@ -84,4 +85,14 @@ subprojects {
         annotation("jakarta.persistence.Embeddable")
     }
 
+}
+
+tasks.register<BootRun>("bootRunLocal") {
+    group = "application"
+    description = "Runs the Spring Boot application with the 'local' profile"
+
+    mainClass.set("saru.archievment.backend.BackendApplicationKt")
+    classpath = tasks.bootRun.get().classpath
+
+    args("--spring.profiles.active=local")
 }
