@@ -19,7 +19,7 @@ class FileStorageController(
 ) {
 
     @GetMapping
-    fun listFiles(
+    fun getFiles(
         @RequestParam(required = true)
         path: String,
     ): List<File> {
