@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
+import saru.archievment.backend.core.dto.FileDto
 import saru.archievment.backend.core.service.FileStorageService
-import java.io.File
 
 @RestController
 @RequestMapping("/api/files")
@@ -22,7 +22,7 @@ class FileStorageController(
     fun getFiles(
         @RequestParam(required = true)
         path: String,
-    ): List<File> {
+    ): List<FileDto> {
         return fileStorageService.listFiles(path)
     }
 
