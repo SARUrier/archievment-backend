@@ -10,6 +10,8 @@ import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.web.SecurityFilterChain
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository
+import org.springframework.security.web.csrf.CsrfTokenRequestAttributeHandler
 
 @Configuration
 class SecurityConfig {
@@ -24,7 +26,10 @@ class SecurityConfig {
     @Bean
     fun securityFilterChain(http: HttpSecurity): SecurityFilterChain {
         http
-            .csrf { it.disable() }
+            .csrf {
+                it.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+                it.csrfTokenRequestHandler(CsrfTokenRequestAttributeHandler())
+            }
             .authorizeHttpRequests {
                 it.requestMatchers("/api/auth/**").permitAll()
                 it.anyRequest().authenticated()
@@ -39,8 +44,8 @@ class SecurityConfig {
             .sessionManagement {
                 it.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
             }
-        return http.build()
 
+        return http.build()
     }
 
 }
