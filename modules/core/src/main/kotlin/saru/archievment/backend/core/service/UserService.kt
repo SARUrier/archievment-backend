@@ -33,11 +33,6 @@ class UserService(
         return save(user)
     }
 
-    fun validateLogin(username: String, rawPassword: String): Boolean {
-        val user = repository.findByUsername(username) ?: return false
-        return passwordEncoder.matches(rawPassword, user.password)
-    }
-
     fun findByUsername(username: String): User? {
         return repository.findByUsername(username)
     }
