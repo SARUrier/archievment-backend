@@ -49,6 +49,8 @@ allprojects {
 
         implementation("org.springframework.boot:spring-boot-starter")
         implementation("org.springframework.boot:spring-boot-starter-security")
+
+        implementation("tools.jackson.module:jackson-module-kotlin")
     }
 
     kotlin {
