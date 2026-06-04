@@ -11,7 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository
 import org.springframework.web.bind.annotation.*
 import saru.archievment.backend.core.dto.AuthUserDto
-import saru.archievment.backend.core.dto.LoginRequest
+import saru.archievment.backend.core.dto.LoginRequestDto
 
 @RestController
 @RequestMapping("/api/auth")
@@ -23,7 +23,7 @@ class AuthController(
     @PostMapping("/login")
     fun login(
         @RequestBody
-        request: LoginRequest,
+        request: LoginRequestDto,
         servletRequest: HttpServletRequest,
         servletResponse: HttpServletResponse,
     ): ResponseEntity<AuthUserDto> {

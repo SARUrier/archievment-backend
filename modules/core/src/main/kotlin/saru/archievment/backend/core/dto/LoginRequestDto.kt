@@ -1,10 +1,6 @@
 package saru.archievment.backend.core.dto
 
-data class LoginRequest(
+data class LoginRequestDto(
     val username: String,
     val password: String,
-)
-
-data class AuthUserDto(
-    val username: String,
 )
