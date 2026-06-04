@@ -1,7 +1,6 @@
 package saru.archievment.backend.core.config
 
 import jakarta.servlet.http.HttpServletResponse
-import org.apache.catalina.webresources.TomcatURLStreamHandlerFactory.disable
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.authentication.AuthenticationManager
@@ -25,7 +24,7 @@ class SecurityConfig {
     @Bean
     fun securityFilterChain(http: HttpSecurity): SecurityFilterChain {
         http
-            .csrf { disable() }
+            .csrf { it.disable() }
             .authorizeHttpRequests {
                 it.requestMatchers("/api/auth/**").permitAll()
                 it.anyRequest().authenticated()
@@ -40,8 +39,8 @@ class SecurityConfig {
             .sessionManagement {
                 it.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
             }
-
         return http.build()
+
     }
 
 }
