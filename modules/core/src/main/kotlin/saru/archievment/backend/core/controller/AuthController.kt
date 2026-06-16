@@ -56,4 +56,5 @@ class AuthController(
         }
         return ResponseEntity.ok(AuthUserDto(authentication.name))
     }
+
 }
