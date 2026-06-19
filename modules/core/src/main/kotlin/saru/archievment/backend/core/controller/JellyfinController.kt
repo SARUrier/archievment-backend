@@ -6,6 +6,7 @@ import org.springframework.security.core.Authentication
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
+import saru.archievment.backend.core.config.JellyfinProperties
 import saru.archievment.backend.core.dto.JellyfinTokenDto
 import tools.jackson.databind.ObjectMapper
 import java.net.URI
@@ -13,13 +14,11 @@ import java.net.http.HttpClient
 import java.net.http.HttpRequest
 import java.net.http.HttpResponse
 
-private const val JELLYFIN_API_KEY = "JELLYFIN_API_KEY"
-private const val JELLYFIN_USERNAME = "JELLYFIN_USERNAME"
-private const val JELLYFIN_PASSWORD = "JELLYFIN_PASSWORD"
-
 @RestController
 @RequestMapping("/api/jellyfin")
-class JellyfinController {
+class JellyfinController(
+    private val jellyfinProperties: JellyfinProperties,
+) {
 
     @GetMapping("/token")
     fun jellyfinToken(authentication: Authentication?): ResponseEntity<JellyfinTokenDto> {
@@ -27,11 +26,11 @@ class JellyfinController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build()
         }
 
-        val apiKey = System.getenv(JELLYFIN_API_KEY)
+        val apiKey = jellyfinProperties.apiKey
             ?: return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).build()
-        val jellyfinUsername = System.getenv(JELLYFIN_USERNAME)
+        val jellyfinUsername = jellyfinProperties.username
             ?: return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).build()
-        val jellyfinPassword = System.getenv(JELLYFIN_PASSWORD)
+        val jellyfinPassword = jellyfinProperties.password
             ?: return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).build()
 
         val client = HttpClient.newHttpClient()

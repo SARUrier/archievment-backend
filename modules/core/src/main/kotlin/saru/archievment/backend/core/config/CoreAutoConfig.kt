@@ -6,5 +6,8 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 
 @AutoConfiguration
 @AutoConfigurationPackage
-@EnableConfigurationProperties(FileStorageProperties::class)
+@EnableConfigurationProperties(
+    FileStorageProperties::class,
+    JellyfinProperties::class
+)
 class CoreAutoConfig

@@ -18,3 +18,8 @@ spring:
 
 file-storage:
   base-path: ${FILE_BASE_PATH:/app/files}
+
+jellyfin:
+  apiKey: ${JELLYFIN_KEY:}
+  username: ${JELLYFIN_USERNAME:}
+  password: ${JELLYFIN_PASSWORD:}
