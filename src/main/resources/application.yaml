@@ -21,4 +21,4 @@ file-storage:
 
 jellyfin:
   apiKey: ${JELLYFIN_API_KEY:}
-  user-id: ${JELLYFIN_USER_ID:}
+  userId: ${JELLYFIN_USER_ID:}
