@@ -8,5 +8,6 @@ import org.springframework.context.annotation.Configuration
 class JellyfinProperties {
 
     var apiKey: String? = null
+    var userId: String? = null
 
 }

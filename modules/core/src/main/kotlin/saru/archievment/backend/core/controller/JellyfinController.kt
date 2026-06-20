@@ -22,8 +22,10 @@ class JellyfinController(
         }
         val apiKey = jellyfinProperties.apiKey
             ?: return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).build()
+        val userId = jellyfinProperties.userId
+            ?: return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).build()
 
-        return ResponseEntity.ok(JellyfinTokenDto(apiKey))
+        return ResponseEntity.ok(JellyfinTokenDto(apiKey, userId))
     }
 
 }
